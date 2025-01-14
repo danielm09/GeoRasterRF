@@ -18,6 +18,10 @@ conda env create -f environment.yml
 ```
 > *Make sure the command is executed from the GeoRasterRF directory.*
 
+Activate conda environment.
+```
+conda activate rf_gui
+```
 ## Usage
 Run main.py to open the Graphical User Interface.
 ```
