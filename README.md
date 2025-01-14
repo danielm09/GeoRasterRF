@@ -10,7 +10,7 @@ git clone https://github.com/danielm09/GeoRasterRF.git
 ```
 ### Install dependencies
 The program requires the following packages installed: numpy, pandas, gdal, scikit-learn and pyqt.
-Use the environment.yml file to create conda envinroment with required packages.
+Use the environment.yml file to create conda environment with required packages.
 ```
 conda env create -f environment.yml
 ```
