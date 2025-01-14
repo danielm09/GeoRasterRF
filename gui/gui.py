@@ -10,7 +10,9 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         """MainWindow constructor."""
         super().__init__()
-        self.resize(529, 772)
+        #self.resize(529, 772)
+        self.center()
+        self.adjustSize()
         self.setWindowTitle("Random Forest Classifier")
         self.setWindowIcon(QtGui.QIcon('icon.svg'))
 
@@ -44,6 +46,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.layoutWidget = QtWidgets.QWidget(self.splitter)
         self.gridLayout_5 = QtWidgets.QGridLayout(self.layoutWidget)
         self.gridLayout_5.setContentsMargins(0, 0, 0, 0)
+
+        self.titleAndIconContainer = QtWidgets.QWidget(self.layoutWidget)
+        self.gridLayout_x = QtWidgets.QGridLayout(self.titleAndIconContainer)
+        self.gridLayout_x.setContentsMargins(0, 0, 0, 0)
         
 
 
@@ -71,6 +77,12 @@ class MainWindow(QtWidgets.QMainWindow):
         #labels
         self.label_progTitle = QtWidgets.QLabel(self.layoutWidget,text = "Random Forest Classifier\n v1.1", font=QtGui.QFont('Sans',25))
         self.label_progTitle.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_progIcon = QtWidgets.QLabel(self.layoutWidget)
+        pixmap = QtGui.QPixmap('icon.svg')
+        self.label_progIcon.setPixmap(pixmap)
+        self.label_progIcon.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
+        self.label_progIcon.setMaximumSize(100,100)
+        self.label_progIcon.setScaledContents(True)
         self.label_inpImg = QtWidgets.QLabel(self.image_tab,text = "Input Image")
         self.label_inpBlocks = QtWidgets.QLabel(self.image_tab,text = "Number of Blocks ( >1)")
         self.label_outImgC = QtWidgets.QLabel(self.image_tab,text = "Output Image (Class)")
@@ -132,8 +144,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         #layout
+        self.gridLayout_x.addWidget(self.label_progIcon, 0, 0, 1, 1)
+        self.gridLayout_x.addWidget(self.label_progTitle, 0, 1, 1, 1)
 
-        self.gridLayout_5.addWidget(self.label_progTitle, 0, 0, 1, 1)
+        self.gridLayout_5.addWidget(self.titleAndIconContainer, 0, 0, 1, 1)
         self.gridLayout_5.addWidget(self.groupBox_inputs, 1, 0, 1, 1)
         self.gridLayout_5.addWidget(self.groupBox_clfMode, 2, 0, 1, 1)
         self.gridLayout_5.addWidget(self.setClfParameters, 3, 0, 1, 1)
@@ -279,6 +293,12 @@ class MainWindow(QtWidgets.QMainWindow):
         #classification.classweight_user=self.lineEdit_classweight.text() # to be implemented
         classification.ccpalpha_user=''
         classification.maxsamples_user=''
+
+    def center(self):
+        qr = self.frameGeometry() #gets geometry of the main window
+        cp = QtWidgets.QDesktopWidget().availableGeometry().center() #gets geometry of the screen and returns the center
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
         
     def importTraining(self, enabled):
         if enabled:
@@ -511,7 +531,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_contact(self):
         msg = QMessageBox()
         msg.setWindowTitle('Contact')
-        msg.setText('Developed by Daniel Moraes. E-mail: moraesd90@gmail.com')
+        msg.setText('Developed by Daniel Moraes (https://github.com/danielm09/)')
         msg.setTextFormat(QtCore.Qt.MarkdownText)
         msg.setIcon(QMessageBox.Information)
         x = msg.exec_()
