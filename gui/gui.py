@@ -12,6 +12,7 @@ class MainWindow(QtWidgets.QMainWindow):
         super().__init__()
         self.resize(529, 772)
         self.setWindowTitle("Random Forest Classifier")
+        self.setWindowIcon(QtGui.QIcon('icon.svg'))
 
         #menubar
         self.menubar = QtWidgets.QMenuBar()
