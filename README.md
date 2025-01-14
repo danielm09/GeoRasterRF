@@ -14,12 +14,12 @@ Use the environment.yml file to create conda environment with required packages.
 ```
 conda env create -f environment.yml
 ```
+> *Make sure the command is executed from the GeoRasterRF directory.*
+
 Activate conda environment.
 ```
 conda activate rf_gui
 ```
-> *Make sure the command is executed from the GeoRasterRF directory.*
-
 ## Usage
 Run main.py to open the Graphical User Interface.
 ```
